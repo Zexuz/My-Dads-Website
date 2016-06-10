@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    form#submitForm
+        h5 Datum
+
+        label(for="year") År
+        input#year(type="text" data-type="number" data-lenght="4" placeholder="Tex: 2016")
+        label#label-year.hidden.error.spacing(for="year" ) Felaktig information
+        br
+
+        label(for="month") Månad
+        input#month(type="text" data-type="number" data-lenght="2" placeholder="Tex: 11")
+        label#label-month.hidden.error.spacing(for="month") Felaktig information
+        br
+
+        label(for="day") Dag
+        input#day(type="text" data-type="number" data-lenght="2" placeholder="Tex: 07")
+        label#label-day.hidden.error.spacing(for="day") Felaktig information
+        br
+
+        h5 Energi
+        label(for="energi") Energi mät
+        input#energi(type="text" data-type="number" placeholder="Tex: 104330")
+        label#label-energi.hidden.error.spacing(for="energi") Felaktig information
+        br
+
+        label(for="energi1") Energi under mät
+        input#energi1(type="text" data-type="number" placeholder="Tex: 49209")
+        label#label-enegi1.hidden.error.spacing(for="energi1") Felaktig information
+        br
+
+        h5 Tempratur
+        label(for="waterIn") Vatten in
+        input#waterIn(type="text" data-type="number" placeholder="Tex: 2")
+        label#label-waterIn.hidden.error.spacing(for="waterIn") Felaktig information
+        br
+
+        label(for="waterOut") Vatten ut
+        input#waterOut(type="text" data-type="number" placeholder="Tex: -2")
+        label#label-waterOut.hidden.error.spacing(for="waterOut") Felaktig information
+        br
+
+        label(for="tempOut") Tempratur ute
+        input#tempOut(type="text" data-type="number"  placeholder="Tex: -22")
+        label#label-tempOut.hidden.error.spacing(for="tempOut") Felaktig information
+        br
+
+    a.btn(href="#" onclick="addInfo()") Lägg till information!

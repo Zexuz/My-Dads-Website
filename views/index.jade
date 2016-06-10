@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    a.btn.right(href="#" onclick="createLineChart(document.getElementById('myChart'))") Add new data #{text}
+    br
+    canvas(id="myChart" width="400" height="100")

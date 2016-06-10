@@ -1,0 +1,24 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.spacing {
+    padding-left: 50px;
+}
+
+.error {
+    color: #d7000a;
+}
+
+.success {
+    color: #16d733;
+}
+
+.hidden {
+    display: none
+}
