@@ -3,6 +3,7 @@ function addInfo() {
 
     console.log(inputs);
 
+    var data = [];
     for (var i = 0; i < inputs.length; i++) {
         var obj = $(inputs[i]);
 
@@ -13,12 +14,23 @@ function addInfo() {
 
         if (obj.attr('data-type') === "number" && Number.isInteger(parseInt(value)) === true) {
             console.log("Correct input!");
+            data.push(parseInt(value));
         } else {
-            console.error("Wrong inpout")
+            console.error("Wrong inpout");
+            return;
         }
 
 
     }
+
+    $.ajax({
+        type: "POST",
+        url: "/data/"+ data.join('/'),
+        success: function (data) {
+            console.log(data);
+        },
+        dataType: 'JSON'
+    });
 
 }
 
