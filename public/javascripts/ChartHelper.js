@@ -1,39 +1,88 @@
-function createLineChart(ctx, type) {
-    type = "line";
+function getDataFromDB(dates) {
+
+    var lables = [];
+
+    var bIn = [];
+    var bOut = [];
+    var houseEnergy = [];
+    var outTemp = [];
+    var pumpEnergy = [];
+
+    console.log(dates);
+
+    for (var i = 0; i < dates.length; i++) {
+        var obj = dates[i];
+
+        console.log(obj);
+
+
+        (function (date, index, lenght, callback) {
+            $.ajax({
+                type: "GET",
+                url: "/data/" + date,
+                success: function (data) {
+                    houseEnergy.push(data.houseEnergy);
+                    outTemp.push(data.outTemp);
+                    pumpEnergy.push(data.pumpEnergy);
+                    bOut.push(data.brineOut);
+                    bIn.push(data.brineIn);
+                    lables.push(data._id);
+
+                    if(index === lenght-1)
+                        callback();
+                },
+                dataType: 'JSON'
+            });
+
+
+        })(obj, i, dates.length, function () {
+            createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy);
+        });
+
+    }
+
+}
+
+function transformDBDataToChartData() {
+
+}
+
+
+function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy) {
 
     new Chart(ctx, {
         type: type,
         data: {
-            labels: ["8/12", "15/12", "22/12", "29/12", "05/01"],
+            labels: periodLabel,
             datasets: [
                 {
                     label: 'Elmätaren',
                     fill: false,
                     borderColor: "rgba(75,192,192,1)",
-                    data: [104330, 104624, 104905, 105262, 105597],
+                    data: houseEnergy,
                     borderWidth: 1
                 },
                 {
                     label: 'Under mätaren',
                     fill: false,
                     borderColor: "rgba(60,200,100,1)",
-                    data: [49209, 49427, 49615, 49845, 50081],
+                    data: pumpEnergy,
                     borderWidth: 1
                 },
                 {
                     fill: false,
                     label: 'Brine in',
-                    data: [2, 1, 1, 2, 1]
+                    data: bIn
                 },
                 {
                     label: 'Brine Ut',
                     fill: false,
-                    data: [-2, -2, -2, -2, -2]
+                    data: bOut
                 },
                 {
                     label: 'Ute temp',
                     fill: false,
-                    data: [10, -13, 1, -10, 17]
+                    data: outTemp
                 }
             ]
         },

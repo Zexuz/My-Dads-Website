@@ -14,7 +14,7 @@ function addInfo() {
 
         if (obj.attr('data-type') === "number" && Number.isInteger(parseInt(value)) === true) {
             console.log("Correct input!");
-            data.push(parseInt(value));
+            data.push(value);
         } else {
             console.error("Wrong inpout");
             return;

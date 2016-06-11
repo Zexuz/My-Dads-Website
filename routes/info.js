@@ -15,7 +15,13 @@ router.get('/add', function (req, res, next) {
 
 /* GET special  */
 router.get('/:id', function (req, res, next) {
-    res.render('index', {title: 'This is where all the charts is ', text: req.params.id});
+    var db = req.app.locals.db;
+
+    console.log(req.params.id);
+    var dadCollection = db.collection('datapoints');
+    dadCollection.findOne({_id: req.params.id}, function(err, document) {
+        res.send(document);
+    });
 });
 
 
@@ -24,9 +30,22 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
     var data = new Data(req.params);
     console.log(data.isValid());
 
-    if (data.isValid())
-        res.send("Hello");
-    else{
+    if (data.isValid()) {
+
+        var db = req.app.locals.db;
+
+        var document = data.data;
+        document._id = document.year + "-" + document.month + "-" + document.day;
+
+        var dadCollection = db.collection('datapoints');
+        dadCollection.insertOne(document).then(function () {
+            res.send("Hello");
+        }).catch(function () {
+            res.send("Wrong data!");
+
+        })
+
+    } else {
         res.send("Wrong data!");
     }
 });
