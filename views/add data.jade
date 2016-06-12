@@ -23,12 +23,12 @@ block content
         br
 
         h5 Energi
-        label(for="energi") Energi mät
+        label(for="energi") Total Energi
         input#energi(type="text" data-type="number" placeholder="Tex: 104330")
         label#label-energi.hidden.error.spacing(for="energi") Felaktig information
         br
 
-        label(for="energi1") Energi under mät
+        label(for="energi1") Pump energi
         input#energi1(type="text" data-type="number" placeholder="Tex: 49209")
         label#label-enegi1.hidden.error.spacing(for="energi1") Felaktig information
         br
@@ -47,6 +47,16 @@ block content
         label(for="tempOut") Tempratur ute
         input#tempOut(type="text" data-type="number"  placeholder="Tex: -22")
         label#label-tempOut.hidden.error.spacing(for="tempOut") Felaktig information
+        br
+
+        label(for="runtTime") Drifttid
+        input#runtTime(type="text" data-type="number"  placeholder="Tex: 500")
+        label#label-runtTime.hidden.error.spacing(for="runtTime") Felaktig information
+        br
+
+        label(for="wormWater") Vatten varm
+        input#wormWater(type="text" data-type="number"  placeholder="Tex: 300")
+        label#label-wormWater.hidden.error.spacing(for="wormWater") Felaktig information
         br
 
     a#addDataBtn.btn(href="#") Lägg till information!
