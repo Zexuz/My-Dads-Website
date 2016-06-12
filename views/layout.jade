@@ -2,7 +2,10 @@ doctype html
 html
     head
         title= title
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
+
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js')
         script(src='https://code.jquery.com/jquery-3.0.0.js', integrity='sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=', crossorigin='anonymous')
         script(type="text/javascript", src="/bower_components/Chart.js/dist/Chart.bundle.js")
         script(type="text/javascript", src="/bower_components/Chart.js/dist/Chart.js")
@@ -11,5 +14,31 @@ html
         script(type="text/javascript", src="/javascripts/restapi.helper.js")
 
     body
-        block content
+        nav
+            div.nav-wrapper.container
+                ul#nav-mobile.right.hide-on-med-and-down
+                    li
+                        a(href='/data') Data
+                    li
+                        a(href='/data/add') Lägg till dag
+        main.container
+            block content
+
+        footer.page-footer.bottom
+            div.container
+                div.row
+                    div.col.l6.s12
+                        h5.white-text Användbar information
+                        p.grey-text.text-lighten-4 Denna hemsida är dedikerat till min pappa och gjord med kärlek <3
+                        p.grey-text.text-lighten-4 This website is dedicated to my dad and made with love <3
+                    div.col.l4.offset-l2.s12
+                        h5.white-text Användbara länkar
+                        ul
+                            li
+                                a.grey-text.text-lighten-3(href='mailto:robin.edbom@gmail.com' ) Gmail: Robin Edbom
+                            li
+                                a.grey-text.text-lighten-3(href='http://www.github.com/Zexus/My-dads-website') GitHub repo
+            div.footer-copyright
+                div.container
+                    | © 2016 Copyright Robin Edbom
 

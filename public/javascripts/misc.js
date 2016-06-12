@@ -53,10 +53,10 @@ function inputListener(event) {
 
     console.log(parseInt(element.val()));
 
-    if (element.attr('data-type') === "number" && Number.isInteger(parseInt(element.val())) === true) {
-        $("#label-" + element.attr("id")).addClass("success").removeClass("error").removeClass("hidden").text("Korrekt!");
-    } else {
-        $("#label-" + element.attr("id")).addClass("error").removeClass("success").removeClass("hidden").text("Felaktig information!");
+    if (element.attr('data-type') !== "number" || Number.isInteger(parseInt(element.val())) !== true) {
+        $("#label-" + element.attr("id")).addClass("error").removeClass("success").removeClass("hidden");
+    }else{
+        $("#label-" + element.attr("id")).addClass("hidden");
     }
 
 }

@@ -1,6 +1,8 @@
 body {
-    padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 a {
@@ -21,4 +23,16 @@ a {
 
 .hidden {
     display: none
+}
+nav {
+    background-color: #2a81d7;
+}
+
+footer.page-footer {
+    background-color: #2a81d7;
+
+}
+
+main {
+    flex: 1 0 auto;
 }

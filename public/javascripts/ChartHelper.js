@@ -7,7 +7,7 @@ function getDataFromDB(dates) {
     var houseEnergy = [];
     var outTemp = [];
     var pumpEnergy = [];
-    var runtTime = [];
+    var runTime = [];
     var warmWater= [];
 
     //TODO make "förbrukning pump" (delta PumpEnergy) and "förbrukning pump" period (delta pumpEnergy)/ period
@@ -32,8 +32,8 @@ function getDataFromDB(dates) {
                     bOut.push(data.response.data.brineOut);
                     bIn.push(data.response.data.brineIn);
                     lables.push(data.response.data._id);
-                    runtTime.push(data.response.data.runTime);
-                    runtTime.push(data.response.data.warmWater);
+                    runTime.push(data.response.data.runTime);
+                    warmWater.push(data.response.data.warmWater);
 
                     if(index === lenght-1)
                         callback();
@@ -43,7 +43,7 @@ function getDataFromDB(dates) {
 
 
         })(obj, i, dates.length, function () {
-            createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy);
+            createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy,runTime,warmWater);
         });
 
     }
@@ -55,7 +55,7 @@ function transformDBDataToChartData() {
 }
 
 
-function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy) {
+function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy,runTime,warmWater) {
 
     new Chart(ctx, {
         type: type,
@@ -90,6 +90,16 @@ function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp
                     label: 'Ute temp',
                     fill: false,
                     data: outTemp
+                },
+                {
+                    label: 'Drift tid',
+                    fill: false,
+                    data: runTime
+                },
+                {
+                    label: 'Vatten varm',
+                    fill: false,
+                    data: warmWater
                 }
             ]
         },
