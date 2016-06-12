@@ -7,6 +7,10 @@ function getDataFromDB(dates) {
     var houseEnergy = [];
     var outTemp = [];
     var pumpEnergy = [];
+    var runtTime = [];
+    var warmWater= [];
+
+    //TODO make "förbrukning pump" (delta PumpEnergy) and "förbrukning pump" period (delta pumpEnergy)/ period
 
     console.log(dates);
 
@@ -21,12 +25,15 @@ function getDataFromDB(dates) {
                 type: "GET",
                 url: "/data/" + date,
                 success: function (data) {
-                    houseEnergy.push(data.houseEnergy);
-                    outTemp.push(data.outTemp);
-                    pumpEnergy.push(data.pumpEnergy);
-                    bOut.push(data.brineOut);
-                    bIn.push(data.brineIn);
-                    lables.push(data._id);
+
+                    houseEnergy.push(data.response.data.houseEnergy);
+                    outTemp.push(data.response.data.outTemp);
+                    pumpEnergy.push(data.response.data.pumpEnergy);
+                    bOut.push(data.response.data.brineOut);
+                    bIn.push(data.response.data.brineIn);
+                    lables.push(data.response.data._id);
+                    runtTime.push(data.response.data.runTime);
+                    runtTime.push(data.response.data.warmWater);
 
                     if(index === lenght-1)
                         callback();

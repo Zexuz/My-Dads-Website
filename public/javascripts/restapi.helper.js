@@ -15,6 +15,8 @@ class RestApiHelper {
         }).always(function (data) {
 
             data.response = data.response || {};
+
+            console.log(data);
             if (data.response.success === true) {
                 callback(null, data);
                 return

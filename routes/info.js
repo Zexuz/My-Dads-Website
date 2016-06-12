@@ -19,14 +19,14 @@ router.get('/:id', function (req, res, next) {
 
     console.log(req.params.id);
     var dadCollection = db.collection('datapoints');
-    dadCollection.findOne({_id: req.params.id}, function(err, document) {
-        res.send(document);
+    dadCollection.findOne({_id: req.params.id}, function (err, document) {
+        res.send({response: {success: true, data: document}});
     });
 });
 
 
 // TODO create data class to handel the url conversion for the data 
-router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outTemp', function (req, res, next) {
+router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outTemp/:runtTime/:warmWater', function (req, res, next) {
     var data = new Data(req.params);
     console.log(data.isValid());
 
@@ -39,7 +39,8 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
 
         var dadCollection = db.collection('datapoints');
         dadCollection.insertOne(document).then(function () {
-            res.send("Hello");
+            res.send({response: {success: true, data: null}});
+
         }).catch(function () {
             res.send("Wrong data!");
 
