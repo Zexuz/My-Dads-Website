@@ -4,59 +4,53 @@ block content
     h1= title
     p Welcome to #{title}
 
-    form#submitForm
+    form#submitForm.col.s12
         h5 Datum
+        div.row
+            div.input-field.col.s4
+                input#year.validate(placeholder='Ex: 2016', type='number')
+                label(for='year') År
 
-        label.left(for="year") År
-        label#label-year.hidden.error.spacing.left(for="year" ) Nu skrev du in något konstigt tror jag pappa
-        input#year(type="text" data-type="number" data-lenght="4" placeholder="Tex: 2016")
-        br
+            div.input-field.col.s4
+                input#month.validate(placeholder='Ex: 11', type='number')
+                label(for='month') Måndag
 
-        label.left(for="month") Månad
-        label#label-month.hidden.error.spacing.left(for="month") Nu skrev du in något konstigt tror jag pappa
-        input#month(type="text" data-type="number" data-lenght="2" placeholder="Tex: 11")
-        br
-
-        label.left(for="day") Dag
-        label#label-day.hidden.error.spacing.left(for="day") Nu skrev du in något konstigt tror jag pappa
-        input#day(type="text" data-type="number" data-lenght="2" placeholder="Tex: 07")
-        br
+            div.input-field.col.s4
+                input#day.validate(placeholder='Ex: 7', type='number')
+                label(for='day') Dag
 
         h5 Energi
-        label(for="energi") Total Energi
-        label#label-energi.hidden.error.spacing.left(for="energi") Nu skrev du in något konstigt tror jag pappa
-        input#energi(type="text" data-type="number" placeholder="Tex: 104330")
-        br
+        div.row
+            div.input-field.col.s6
+                input#energy.validate(placeholder='Ex: 104330', type='number')
+                label(for='energy') Totala Energin
 
-        label(for="energi1") Pump energi
-        label#label-enegi1.hidden.error.spacing.left(for="energi1") Nu skrev du in något konstigt tror jag pappa
-        input#energi1(type="text" data-type="number" placeholder="Tex: 49209")
-        br
+            div.input-field.col.s6
+                input#pumpEnergy.validate(placeholder='Ex: 49209', type='number')
+                label(for='pumpEnergy') Pump Energi
 
         h5 Tempratur
-        label(for="waterIn") Vatten in
-        label#label-waterIn.hidden.error.spacing.left(for="waterIn") Nu skrev du in något konstigt tror jag pappa
-        input#waterIn(type="text" data-type="number" placeholder="Tex: 2")
-        br
+        div.row
+            div.input-field.col.s4
+                input#waterIn.validate(placeholder='Ex: 2', type='number')
+                label(for='waterIn') Vatten in
 
-        label(for="waterOut") Vatten ut
-        label#label-waterOut.hidden.error.spacing.left(for="waterOut") Nu skrev du in något konstigt tror jag pappa
-        input#waterOut(type="text" data-type="number" placeholder="Tex: -2")
-        br
+            div.input-field.col.s4
+                input#waterOut.validate(placeholder='Ex: -2', type='number')
+                label(for='waterOut') Vatten ut
 
-        label(for="tempOut") Tempratur ute
-        label#label-tempOut.hidden.error.spacing.left(for="tempOut") Nu skrev du in något konstigt tror jag pappa
-        input#tempOut(type="text" data-type="number"  placeholder="Tex: -22")
-        br
+            div.input-field.col.s4
+                input#tempOut.validate(placeholder='Ex: -22', type='number')
+                label(for='tempOut') Temp ute
 
-        label(for="runtTime") Drifttid
-        label#label-runtTime.hidden.error.spacing.left(for="runtTime") Nu skrev du in något konstigt tror jag pappa
-        input#runtTime(type="text" data-type="number"  placeholder="Tex: 500")
-        br
+        h5 Tid
+        div.row
+            div.input-field.col.s6
+                input#runtTime.validate(placeholder='Ex: 2', type='number')
+                label(for='runtTime') Drift tid
 
-        label(for="wormWater") Vatten varm
-        label#label-wormWater.hidden.error.spacing.left(for="wormWater") Nu skrev du in något konstigt tror jag pappa
-        input#wormWater(type="text" data-type="number"  placeholder="Tex: 300")
-        br
+            div.input-field.col.s6
+                input#wormWater.validate(placeholder='Ex: 2', type='number')
+                label(for='wormWater') Vatten varm
 
     a#addDataBtn.btn(href="#") Lägg till information!

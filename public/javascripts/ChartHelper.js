@@ -50,10 +50,6 @@ function getDataFromDB(dates) {
 
 }
 
-function transformDBDataToChartData() {
-
-}
-
 
 function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy,runTime,warmWater) {
 

@@ -35,7 +35,7 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
         var db = req.app.locals.db;
 
         var document = data.data;
-        document._id = document.year + "-" + document.month + "-" + document.day;
+        document._id = new Date(document.year,document.month,document.day).getTime();
 
         var dadCollection = db.collection('datapoints');
         dadCollection.insertOne(document).then(function () {

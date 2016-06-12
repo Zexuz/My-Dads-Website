@@ -4,7 +4,16 @@ block content
     h1= title
     p Welcome to #{title}
 
-    input#placeholderTemp(placeholder="2016-11-07")
+
+
+    form
+        a.btn.right Vad är detta?
+        input#startDate(placeholder="2016-11-07")
+        label(for="startDate") Start period
+
+        input#endDate(placeholder="2014-11-07")
+        label(for="endDate") Slut period
+
     //a(href="#" onclick="getDataFromDB($('#placeholderTemp').val())") get Data
     a(href="#" onclick="getDataFromDB(['2015-4-14','2015-4-21','2015-4-28','2015-05-05'])") get Data
     br
