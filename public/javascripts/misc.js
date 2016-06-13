@@ -37,8 +37,10 @@ $(function () {
 function addInfoCallback(err, data) {
     if (err) {
         console.error(err);
+        Materialize.toast('Tyvärr blev något fel pappa...', 4000);// 4000 is the duration of the toast
         return;
     }
+    Materialize.toast('Bra pappa, du har nu lagt till en ny dag i databasen!', 4000);// 4000 is the duration of the toast
 
     console.log("data added to the database");
 }
