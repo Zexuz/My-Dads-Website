@@ -31,6 +31,7 @@ router.get('/update/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOu
         title: 'Updatera data',
         btnId: 'updateDataBtn',
         btnText: 'Uppdatera information!',
+        disable:"Bob",
         year: req.params.year,
         month: req.params.month,
         day: req.params.day,

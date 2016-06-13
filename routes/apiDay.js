@@ -63,5 +63,29 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
     }
 });
 
+//TODO we can't update the date
+router.put('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outTemp/:runtTime/:warmWater', function (req, res, next) {
+    var data = new Data(req.params);
+    console.log(data.isValid());
+
+    if (data.isValid()) {
+
+        var db = req.app.locals.db;
+
+        var document = data.data;
+        document._id = new Date(document.year, document.month, document.day).getTime();
+
+        var dadCollection = db.collection('datapoints');
+        dadCollection.update({_id:document._id},document).then(function () {
+            res.send({response: {success: true, data: null}});
+        }).catch(function () {
+            res.send({response: {success: false, data: null}});
+        })
+
+    } else {
+        res.send({response: {success: false, data: null}});
+    }
+});
+
 
 module.exports = router;

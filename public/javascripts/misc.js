@@ -22,6 +22,28 @@ function addInfo(callback, event) {
     restApiHelper.makePost('/day', data.join('/'), callback);
 }
 
+function updateInfo(callback, event) {
+    var inputs = $('#submitForm').find('input');
+
+    var data = [];
+    for (var i = 0; i < inputs.length; i++) {
+        var obj = $(inputs[i]);
+
+        var value = parseInt(obj.val().trim());
+
+        if (isNaN(value)) {
+            alert("Fel input!");
+            return;
+        }
+
+        data.push(value);
+    }
+
+
+    restApiHelper.makePut('/day', data.join('/'), callback);
+}
+
+
 $(function () {
 
     //add restApiHelper to the window object
@@ -31,6 +53,7 @@ $(function () {
     $("input").keyup(inputListener);
     $("#addDataBtn").click(addInfo.bind(null, addInfoCallback));
     $("#getData").click(getDataFromDB);
+    $("#updateDataBtn").click(updateInfo.bind(null,addInfoCallback));
 
 });
 
