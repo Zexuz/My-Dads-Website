@@ -30,7 +30,7 @@ function getDataFromDB(callback) {
     var startDate = 2016;
     var endDate = 2017;
 
-    restApiHelper.makeGet('/data', startDate + '/' + endDate, function (err, data) {
+    restApiHelper.makeGet('/add', startDate + '/' + endDate, function (err, data) {
         if (err) {
             console.error(err);
             return;
@@ -46,7 +46,7 @@ function getDataFromDB(callback) {
             pumpEnergy.push(obj.pumpEnergy);
             bOut.push(obj.brineOut);
             bIn.push(obj.brineIn);
-            lables.push(obj._id);
+            lables.push(obj.year +"-" + obj.month +"-" + obj.day);
             runTime.push(obj.runTime);
             warmWater.push(obj.warmWater);
 

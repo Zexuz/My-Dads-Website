@@ -7,12 +7,19 @@ function addInfo(callback, event) {
     for (var i = 0; i < inputs.length; i++) {
         var obj = $(inputs[i]);
 
-        var value = obj.val().trim();
+        var value = parseInt(obj.val().trim());
+
+
+        if (isNaN(value)) {
+            alert("Fel input!");
+            return;
+        }
+
         data.push(value);
     }
 
 
-    restApiHelper.makePost('/data', data.join('/'), callback);
+    restApiHelper.makePost('/add', data.join('/'), callback);
 }
 
 $(function () {

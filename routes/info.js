@@ -4,13 +4,9 @@ var LocalDate = require('js-joda').LocalDate;
 
 var Data = require('./../lib/Data');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'This is where all the charts is '});
-});
 
 /* GET Add data page. */
-router.get('/add', function (req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('add data', {title: 'This is where you add data'});
 });
 
