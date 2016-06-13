@@ -8,49 +8,49 @@ block content
         h5 Datum
         div.row
             div.input-field.col.s4
-                input#year.validate(placeholder='Ex: 2016', type='number')
+                input#year.validate(placeholder='Ex: 2016',value="#{year}", type='number')
                 label(for='year') År
 
             div.input-field.col.s4
-                input#month.validate(placeholder='Ex: 11', type='number')
+                input#month.validate(placeholder='Ex: 11',value="#{month}", type='number')
                 label(for='month') Måndag
 
             div.input-field.col.s4
-                input#day.validate(placeholder='Ex: 7', type='number')
+                input#day.validate(placeholder='Ex: 7',value="#{day}", type='number')
                 label(for='day') Dag
 
         h5 Energi
         div.row
             div.input-field.col.s6
-                input#energy.validate(placeholder='Ex: 104330', type='number')
+                input#energy.validate(placeholder='Ex: 104330',value="#{houseEnergy}", type='number')
                 label(for='energy') Totala Energin
 
             div.input-field.col.s6
-                input#pumpEnergy.validate(placeholder='Ex: 49209', type='number')
+                input#pumpEnergy.validate(placeholder='Ex: 49209',value="#{pumpEnergy}", type='number')
                 label(for='pumpEnergy') Pump Energi
 
         h5 Tempratur
         div.row
             div.input-field.col.s4
-                input#waterIn.validate(placeholder='Ex: 2', type='number')
+                input#waterIn.validate(placeholder='Ex: 2', value="#{brineIn}",type='number')
                 label(for='waterIn') Vatten in
 
             div.input-field.col.s4
-                input#waterOut.validate(placeholder='Ex: -2', type='number')
+                input#waterOut.validate(placeholder='Ex: -2',value="#{brineOut}", type='number')
                 label(for='waterOut') Vatten ut
 
             div.input-field.col.s4
-                input#tempOut.validate(placeholder='Ex: -22', type='number')
+                input#tempOut.validate(placeholder='Ex: -22', value="#{outTemp}",type='number')
                 label(for='tempOut') Temp ute
 
         h5 Tid
         div.row
             div.input-field.col.s6
-                input#runtTime.validate(placeholder='Ex: 2', type='number')
+                input#runtTime.validate(placeholder='Ex: 2',value="#{runtTime}", type='number')
                 label(for='runtTime') Drift tid
 
             div.input-field.col.s6
-                input#wormWater.validate(placeholder='Ex: 2', type='number')
+                input#wormWater.validate(placeholder='Ex: 2',value="#{warmWater}", type='number')
                 label(for='wormWater') Vatten varm
 
-    a#addDataBtn.btn(href="#") Lägg till information!
+    a(id="#{btnId}" href="#").btn #{btnText}!

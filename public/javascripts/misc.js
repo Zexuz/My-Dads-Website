@@ -34,6 +34,30 @@ $(function () {
 
 });
 
+function getList() {
+    restApiHelper.makeGet('/day', '2000/2100', function (err, data) {
+
+        if (err) {
+            console.error(err);
+            Materialize.toast('Något gick fel pappa och jag vet inte vad..', 4000);
+            return;
+        }
+
+        console.log(data.length);
+        var listElement = $('#list');
+        for (var i = 0; i < data.length; i++) {
+            var obj = data[i];
+
+            var link = $('<a>').text(obj.year + "-" + obj.month + "-" + obj.day)
+                .attr('href',
+                    '/update/' + obj.year + '/' + obj.month + '/' + obj.day + '/' + obj.houseEnergy + '/' + obj.pumpEnergy + '/' + obj.brineIn + '/' + obj.brineOut + '/' + obj.outTemp + '/' + obj.runtTime + '/' + obj.warmWater);
+            var li = $('<li>').append(link);
+            listElement.append(li);
+        }
+
+    });
+}
+
 function addInfoCallback(err, data) {
     if (err) {
         console.error(err);
