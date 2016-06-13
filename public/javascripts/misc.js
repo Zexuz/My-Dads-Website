@@ -19,13 +19,13 @@ function addInfo(callback, event) {
     }
 
 
-    restApiHelper.makePost('/add', data.join('/'), callback);
+    restApiHelper.makePost('/day', data.join('/'), callback);
 }
 
 $(function () {
 
     //add restApiHelper to the window object
-    window.restApiHelper = new RestApiHelper("http://localhost:3000");
+    window.restApiHelper = new RestApiHelper("http://localhost:3000/api");
 
 
     $("input").keyup(inputListener);
@@ -57,7 +57,6 @@ function inputListener(event) {
     }
 
 }
-
 
 function bubbleSort(arr) {
     var len = arr.length;

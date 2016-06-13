@@ -2,7 +2,7 @@ function getDataFromDB(callback) {
 
 
     //get input dates
-    //send to rest api (need new endpoint) /:start/:end
+    //send to rest apiDay (need new endpoint) /:start/:end
     //convert the dates to unix time and run mongo query
     //return all data found
     //controll sort the data on client side
@@ -30,7 +30,7 @@ function getDataFromDB(callback) {
     var startDate = 2016;
     var endDate = 2017;
 
-    restApiHelper.makeGet('/add', startDate + '/' + endDate, function (err, data) {
+    restApiHelper.makeGet('/day/', startDate + '/' + endDate, function (err, data) {
         if (err) {
             console.error(err);
             return;

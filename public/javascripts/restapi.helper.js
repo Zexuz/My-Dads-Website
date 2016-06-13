@@ -4,7 +4,7 @@ class RestApiHelper {
 
 
     constructor(baseUrl) {
-        this.baseUrl = baseUrl; // <http://www.host:port>
+        this.baseUrl = baseUrl; // <http://www.host:port/api>
     }
 
     makePost(endpoint, urlData, callback) {

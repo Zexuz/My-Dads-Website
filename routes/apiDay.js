@@ -1,14 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var LocalDate = require('js-joda').LocalDate;
 
 var Data = require('./../lib/Data');
 
-
-/* GET Add data page. */
-router.get('/', function (req, res, next) {
-    res.render('add data', {title: 'This is where you add data'});
-});
 
 router.get('/:start/:end', function (req, res, next) {
     var db = req.app.locals.db;
@@ -54,11 +48,7 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
         var db = req.app.locals.db;
 
         var document = data.data;
-        var date= new Date(document.year, document.month, document.day).getTime();
-
-        console.log(document.year, document.month, document.day);
         document._id = new Date(document.year, document.month, document.day).getTime();
-        console.log(document._id);
 
         var dadCollection = db.collection('datapoints');
         dadCollection.insertOne(document).then(function () {
@@ -66,7 +56,6 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
 
         }).catch(function () {
             res.send("Wrong data!");
-
         })
 
     } else {
