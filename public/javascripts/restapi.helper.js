@@ -18,7 +18,7 @@ class RestApiHelper {
 
             console.log(data);
             if (data.response.success === true) {
-                callback(null, data);
+                callback(null, data.response.data);
                 return
             }
             callback(data, null);
@@ -32,10 +32,9 @@ class RestApiHelper {
             url: this.baseUrl + endpoint + '/' + urlData,
             dataType: 'JSON'
         }).always(function (data) {
-
             data.response = data.response || {};
             if (data.response.success === true) {
-                callback(null, data);
+                callback(null, data.response.data);
                 return
             }
             callback(data, null);

@@ -1,4 +1,13 @@
-function getDataFromDB(dates) {
+function getDataFromDB(callback) {
+
+
+    //get input dates
+    //send to rest api (need new endpoint) /:start/:end
+    //convert the dates to unix time and run mongo query
+    //return all data found
+    //controll sort the data on client side
+    //loop in data
+    //show data eg, run callback
 
     var lables = [];
 
@@ -8,50 +17,53 @@ function getDataFromDB(dates) {
     var outTemp = [];
     var pumpEnergy = [];
     var runTime = [];
-    var warmWater= [];
+    var warmWater = [];
+
+    /*
+     var startDate = $('#startDate').val();
+     var endDate = $('#endDate').val();
+
+     if (startDate.trim().length === 0 || startDate.trim().length === 0) {
+     return;
+     }
+     */
+    var startDate = 2016;
+    var endDate = 2017;
+
+    restApiHelper.makeGet('/data', startDate + '/' + endDate, function (err, data) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+
+        var sortedData = bubbleSort(data);
+
+        for (var i = 0; i < sortedData.length; i++) {
+            var obj = sortedData[i];
+
+            houseEnergy.push(obj.houseEnergy);
+            outTemp.push(obj.outTemp);
+            pumpEnergy.push(obj.pumpEnergy);
+            bOut.push(obj.brineOut);
+            bIn.push(obj.brineIn);
+            lables.push(obj._id);
+            runTime.push(obj.runTime);
+            warmWater.push(obj.warmWater);
+
+        }
+
+        createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy, runTime, warmWater);
+
+
+    });
 
     //TODO make "förbrukning pump" (delta PumpEnergy) and "förbrukning pump" period (delta pumpEnergy)/ period
 
-    console.log(dates);
-
-    for (var i = 0; i < dates.length; i++) {
-        var obj = dates[i];
-
-        console.log(obj);
-
-
-        (function (date, index, lenght, callback) {
-            $.ajax({
-                type: "GET",
-                url: "/data/" + date,
-                success: function (data) {
-
-                    houseEnergy.push(data.response.data.houseEnergy);
-                    outTemp.push(data.response.data.outTemp);
-                    pumpEnergy.push(data.response.data.pumpEnergy);
-                    bOut.push(data.response.data.brineOut);
-                    bIn.push(data.response.data.brineIn);
-                    lables.push(data.response.data._id);
-                    runTime.push(data.response.data.runTime);
-                    warmWater.push(data.response.data.warmWater);
-
-                    if(index === lenght-1)
-                        callback();
-                },
-                dataType: 'JSON'
-            });
-
-
-        })(obj, i, dates.length, function () {
-            createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy,runTime,warmWater);
-        });
-
-    }
 
 }
 
 
-function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy,runTime,warmWater) {
+function createLineChart(ctx, type, periodLabel, bIn, bOut, houseEnergy, outTemp, pumpEnergy, runTime, warmWater) {
 
     new Chart(ctx, {
         type: type,

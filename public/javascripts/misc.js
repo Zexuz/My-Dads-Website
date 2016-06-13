@@ -1,4 +1,4 @@
-function addInfo(callback,event) {
+function addInfo(callback, event) {
     var inputs = $('#submitForm').find('input');
 
     console.log(inputs);
@@ -8,20 +8,9 @@ function addInfo(callback,event) {
         var obj = $(inputs[i]);
 
         var value = obj.val().trim();
-
-        if (value.length === 0)
-            continue;
-
-        if (obj.attr('data-type') === "number" && Number.isInteger(parseInt(value)) === true) {
-            console.log("Correct input!");
-            data.push(value);
-        } else {
-            console.error("Wrong inpout");
-            return;
-        }
-
-
+        data.push(value);
     }
+
 
     restApiHelper.makePost('/data', data.join('/'), callback);
 }
@@ -33,7 +22,8 @@ $(function () {
 
 
     $("input").keyup(inputListener);
-    $("#addDataBtn").click(addInfo.bind(null,addInfoCallback));
+    $("#addDataBtn").click(addInfo.bind(null, addInfoCallback));
+    $("#getData").click(getDataFromDB);
 
 });
 
@@ -55,10 +45,24 @@ function inputListener(event) {
 
     if (element.attr('data-type') !== "number" || Number.isInteger(parseInt(element.val())) !== true) {
         $("#label-" + element.attr("id")).addClass("error").removeClass("success").removeClass("hidden");
-    }else{
+    } else {
         $("#label-" + element.attr("id")).addClass("hidden");
     }
 
 }
 
+
+function bubbleSort(arr) {
+    var len = arr.length;
+    for (var i = len - 1; i >= 0; i--) {
+        for (var j = 1; j <= i; j++) {
+            if (arr[j - 1] > arr[j]) {
+                var temp = arr[j - 1];
+                arr[j - 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
 

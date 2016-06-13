@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var LocalDate = require('js-joda').LocalDate;
 
 var Data = require('./../lib/Data');
 
@@ -11,6 +12,28 @@ router.get('/', function (req, res, next) {
 /* GET Add data page. */
 router.get('/add', function (req, res, next) {
     res.render('add data', {title: 'This is where you add data'});
+});
+
+router.get('/:start/:end', function (req, res, next) {
+    var db = req.app.locals.db;
+
+    var startArray = req.params.start.split('-');
+    var endArray = req.params.end.split('-');
+
+    if(startArray[1] == undefined) startArray[1] = 1;
+    if(startArray[2] == undefined) startArray[2] = 1;
+
+    if(endArray[1] == undefined) endArray[1] = 1;
+    if(endArray[2] == undefined) endArray[2] = 1;
+
+    var startTime = new Date(startArray[0],startArray[1],startArray[2]).getTime();
+    var endTime = new Date(endArray[0],endArray[1],endArray[2]).getTime();
+
+    var dadCollection = db.collection('datapoints');
+
+    dadCollection.find({_id: {$lt: endTime, $gt: startTime}}).toArray(function (err, documents) {
+        res.send({response: {success: true, data: documents}});
+    });
 });
 
 /* GET special  */
@@ -35,7 +58,11 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
         var db = req.app.locals.db;
 
         var document = data.data;
-        document._id = new Date(document.year,document.month,document.day).getTime();
+        var date= new Date(document.year, document.month, document.day).getTime();
+
+        console.log(document.year, document.month, document.day);
+        document._id = new Date(document.year, document.month, document.day).getTime();
+        console.log(document._id);
 
         var dadCollection = db.collection('datapoints');
         dadCollection.insertOne(document).then(function () {
