@@ -1,14 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var LocalDate = require('js-joda').LocalDate;
 
 var Data = require('./../lib/Data');
 
-
-/* GET Add data page. */
-router.get('/', function (req, res, next) {
-    res.render('add data', {title: 'This is where you add data'});
-});
 
 router.get('/:start/:end', function (req, res, next) {
     var db = req.app.locals.db;
@@ -54,11 +48,7 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
         var db = req.app.locals.db;
 
         var document = data.data;
-        var date= new Date(document.year, document.month, document.day).getTime();
-
-        console.log(document.year, document.month, document.day);
         document._id = new Date(document.year, document.month, document.day).getTime();
-        console.log(document._id);
 
         var dadCollection = db.collection('datapoints');
         dadCollection.insertOne(document).then(function () {
@@ -66,11 +56,34 @@ router.post('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:out
 
         }).catch(function () {
             res.send("Wrong data!");
-
         })
 
     } else {
         res.send("Wrong data!");
+    }
+});
+
+//TODO we can't update the date
+router.put('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outTemp/:runtTime/:warmWater', function (req, res, next) {
+    var data = new Data(req.params);
+    console.log(data.isValid());
+
+    if (data.isValid()) {
+
+        var db = req.app.locals.db;
+
+        var document = data.data;
+        document._id = new Date(document.year, document.month, document.day).getTime();
+
+        var dadCollection = db.collection('datapoints');
+        dadCollection.update({_id:document._id},document).then(function () {
+            res.send({response: {success: true, data: null}});
+        }).catch(function () {
+            res.send({response: {success: false, data: null}});
+        })
+
+    } else {
+        res.send({response: {success: false, data: null}});
     }
 });
 
