@@ -71,12 +71,12 @@ function getList() {
         for (var i = 0; i < data.length; i++) {
             var obj = data[i];
 
-            var link = $('<a>').text(obj.year + "-" + obj.month + "-" + obj.day)
+            var link = $('<a>').text(obj.year + "-" + obj.month + "-" + obj.day).addClass('collection-item')
                 .attr('href',
                     '/update/' + obj.year + '/' + obj.month + '/' + obj.day + '/' + obj.houseEnergy + '/' + obj.pumpEnergy + '/' + obj.brineIn + '/' + obj.brineOut + '/' + obj.outTemp + '/' + obj.runtTime + '/' + obj.warmWater);
-            var li = $('<li>').append(link);
-            listElement.append(li);
+            listElement.append(link);
         }
+
 
     });
 }

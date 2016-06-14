@@ -14,7 +14,7 @@ router.get('/add', function (req, res, next) {
     res.render('add data', {
         title: 'Lägg till dag',
         btnId: 'addDataBtn',
-        btnText: 'Lägg till information!',
+        btnText: 'Lägg till information!'
     });
 });
 
@@ -27,7 +27,8 @@ router.get('/list', function (req, res, next) {
 
 // TODO create data class to handel the url conversion for the data 
 router.get('/update/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outTemp/:runtTime/:warmWater', function (req, res, next) {
-    res.render('add data', {
+    res.render('update data', {
+        p:'Du kan inte ändra datumet, om du har skrivit fel datum får du ta bort hela dagen.',
         title: 'Updatera data',
         btnId: 'updateDataBtn',
         btnText: 'Uppdatera information!',
