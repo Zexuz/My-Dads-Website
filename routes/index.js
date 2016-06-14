@@ -31,7 +31,7 @@ router.get('/update/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOu
         p:'Du kan inte ändra datumet, om du har skrivit fel datum får du ta bort hela dagen.',
         title: 'Updatera data',
         btnId: 'updateDataBtn',
-        btnText: 'Uppdatera information!',
+        btnText: 'Uppdatera information',
         disable:"disabled",
         year: req.params.year,
         month: req.params.month,

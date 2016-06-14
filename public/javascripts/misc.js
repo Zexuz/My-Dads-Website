@@ -44,6 +44,11 @@ function updateInfo(callback, event) {
 }
 
 
+function removeInfo(callback){
+    restApiHelper.makeDelete('/day', [$('#year').val(),$('#month').val(),$('#day').val()].join('/'),callback);
+}
+
+
 $(function () {
 
     //add restApiHelper to the window object
@@ -53,7 +58,8 @@ $(function () {
     $("input").keyup(inputListener);
     $("#addDataBtn").click(addInfo.bind(null, addInfoCallback));
     $("#getData").click(getDataFromDB);
-    $("#updateDataBtn").click(updateInfo.bind(null,addInfoCallback));
+    $("#updateDataBtn").click(updateInfo.bind(null, addInfoCallback));
+    $("#removeData").click(removeInfo.bind(null, removeInfoCallback));
 
 });
 
@@ -68,18 +74,35 @@ function getList() {
 
         console.log(data.length);
         var listElement = $('#list');
+
+
         for (var i = 0; i < data.length; i++) {
             var obj = data[i];
 
-            var link = $('<a>').text(obj.year + "-" + obj.month + "-" + obj.day).addClass('collection-item')
+
+            var dataLink = $('<a>').text(obj.year + "-" + obj.month + "-" + obj.day).addClass('collection-item')
                 .attr('href',
                     '/update/' + obj.year + '/' + obj.month + '/' + obj.day + '/' + obj.houseEnergy + '/' + obj.pumpEnergy + '/' + obj.brineIn + '/' + obj.brineOut + '/' + obj.outTemp + '/' + obj.runtTime + '/' + obj.warmWater);
-            listElement.append(link);
+
+            listElement.append(dataLink);
+
         }
 
 
     });
 }
+
+
+function removeInfoCallback(err, data) {
+    if (err) {
+        console.error(err);
+        Materialize.toast('Tyvärr blev något fel pappa...', 4000);// 4000 is the duration of the toast
+        return;
+    }
+    Materialize.toast('Dagen har nu blivit raderar ifrån databasen', 4000);// 4000 is the duration of the toast
+}
+
+
 
 function addInfoCallback(err, data) {
     if (err) {

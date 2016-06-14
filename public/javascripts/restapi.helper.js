@@ -56,5 +56,21 @@ class RestApiHelper {
         });
     }
 
+    makeDelete(endpoint, urlData, callback) {
+        $.ajax({
+            type: "DELETE",
+            url: this.baseUrl + endpoint + '/' + urlData,
+            dataType: 'JSON'
+        }).always(function (data) {
+            data.response = data.response || {};
+            if (data.response.success === true) {
+                callback(null, data.response.data);
+                return
+            }
+            callback(data, null);
+        });
+    }
+
+
 }
 

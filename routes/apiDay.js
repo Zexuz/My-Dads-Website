@@ -10,14 +10,14 @@ router.get('/:start/:end', function (req, res, next) {
     var startArray = req.params.start.split('-');
     var endArray = req.params.end.split('-');
 
-    if(startArray[1] == undefined) startArray[1] = 1;
-    if(startArray[2] == undefined) startArray[2] = 1;
+    if (startArray[1] == undefined) startArray[1] = 1;
+    if (startArray[2] == undefined) startArray[2] = 1;
 
-    if(endArray[1] == undefined) endArray[1] = 1;
-    if(endArray[2] == undefined) endArray[2] = 1;
+    if (endArray[1] == undefined) endArray[1] = 1;
+    if (endArray[2] == undefined) endArray[2] = 1;
 
-    var startTime = new Date(startArray[0],startArray[1],startArray[2]).getTime();
-    var endTime = new Date(endArray[0],endArray[1],endArray[2]).getTime();
+    var startTime = new Date(startArray[0], startArray[1], startArray[2]).getTime();
+    var endTime = new Date(endArray[0], endArray[1], endArray[2]).getTime();
 
     var dadCollection = db.collection('datapoints');
 
@@ -76,7 +76,7 @@ router.put('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outT
         document._id = new Date(document.year, document.month, document.day).getTime();
 
         var dadCollection = db.collection('datapoints');
-        dadCollection.update({_id:document._id},document).then(function () {
+        dadCollection.update({_id: document._id}, document).then(function () {
             res.send({response: {success: true, data: null}});
         }).catch(function () {
             res.send({response: {success: false, data: null}});
@@ -85,6 +85,24 @@ router.put('/:year/:month/:day/:houseEnergy/:pumpEnergy/:brineIn/:brineOut/:outT
     } else {
         res.send({response: {success: false, data: null}});
     }
+});
+
+
+//TODO we can't update the date
+router.delete('/:year/:month/:day', function (req, res, next) {
+    var data = new Data(req.params);
+
+    var db = req.app.locals.db;
+
+    var document = data.data;
+    document._id = new Date(document.year, document.month, document.day).getTime();
+
+    var dadCollection = db.collection('datapoints');
+    dadCollection.remove({_id: document._id}).then(function () {
+        res.send({response: {success: true, data: null}});
+    }).catch(function () {
+        res.send({response: {success: false, data: null}});
+    })
 });
 
 
