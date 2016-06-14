@@ -54,6 +54,7 @@ function getDataFromDB(callback) {
         }
 
         createLineChart($('#myChart'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy, runTime, warmWater,pumpConsumption);
+        createLineChart($('#myChart1'), 'line', lables, bIn, bOut, houseEnergy, outTemp, pumpEnergy, runTime, warmWater,pumpConsumption);
 
 
     });
